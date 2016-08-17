@@ -11,20 +11,21 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.nitikasaran.ass1.MyActivity"
     tools:showIn="@layout/activity_my"
-    android:background="#fcf5f5">
+    android:background="@drawable/nb">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Is this prime?"
-        android:textSize="40dp"
+        android:textSize="60dp"
         android:id="@+id/ques"
         android:textAlignment="center"
         android:textColor="#2522bf"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp" />
+        android:layout_marginTop="44dp"
+        android:typeface="sans" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -33,11 +34,12 @@
         android:text="Yes"
         android:id="@+id/yesbutton"
         android:textSize="20dp"
-        android:layout_marginBottom="113dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/ques"
-        android:layout_alignStart="@+id/ques"
-        android:onClick="yesbut" />
+        android:onClick="yesbut"
+        android:typeface="serif"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/score"
+        android:layout_toLeftOf="@+id/number"
+        android:layout_toStartOf="@+id/number" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -46,9 +48,11 @@
         android:text="No"
         android:id="@+id/nobutton"
         android:textSize="20dp"
+        android:onClick="nobut"
+        android:typeface="serif"
         android:layout_alignTop="@+id/yesbutton"
-        android:layout_centerHorizontal="true"
-        android:onClick="nobut" />
+        android:layout_toRightOf="@+id/yesbutton"
+        android:layout_toEndOf="@+id/yesbutton" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -57,10 +61,11 @@
         android:text="Next"
         android:id="@+id/nextbutton"
         android:textSize="20dp"
+        android:onClick="nextbut"
+        android:typeface="serif"
         android:layout_alignTop="@+id/nobutton"
-        android:layout_alignRight="@+id/ques"
-        android:layout_alignEnd="@+id/ques"
-        android:onClick="nextbut" />
+        android:layout_toRightOf="@+id/nobutton"
+        android:layout_toEndOf="@+id/nobutton" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,8 +74,17 @@
         android:id="@+id/number"
         android:textSize="80dp"
         android:textColor="#ce1616"
-        android:layout_above="@+id/nobutton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="87dp" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/score"
+        android:textSize="35dp"
+        android:layout_below="@+id/number"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -1,6 +1,9 @@
 package com.example.nitikasaran.ass1;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,19 +20,30 @@ import java.util.Random;
 public class MyActivity extends AppCompatActivity {
 
     Random rand = new Random();
+    static int scoren = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         Button yes = (Button) findViewById(R.id.yesbutton);
         Button no = (Button) findViewById(R.id.nobutton);
         Button next = (Button) findViewById(R.id.nextbutton);
         TextView number = (TextView) findViewById(R.id.number);
         TextView ques = (TextView) findViewById(R.id.ques);
+        TextView score = (TextView) findViewById(R.id.score);
+        score.setTypeface(Typeface.createFromAsset(getAssets(),"GrandHotel-Regular.otf"));
+        number.setTypeface(Typeface.createFromAsset(getAssets(),"GrandHotel-Regular.otf"));
+        ques.setTypeface(Typeface.createFromAsset(getAssets(),"GrandHotel-Regular.otf"));
+        ques.setTextSize(80);
         number.setText(Integer.toString(rand.nextInt(1000)));
+        score.setText("Score : 0");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        //Log.i(TAG, "Inside onSaveInstance");
     }
 
     boolean isPrime(int n){
@@ -46,27 +60,47 @@ public class MyActivity extends AppCompatActivity {
 
     public void yesbut(View view){
         TextView number = (TextView) findViewById(R.id.number);
-        if(isPrime(Integer.parseInt(number.getText().toString())))
+        if(isPrime(Integer.parseInt(number.getText().toString()))) {
             Toast.makeText(getApplicationContext(), "Correct Answer",
-                Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
+            scoren++;
+            TextView score = (TextView) findViewById(R.id.score);
+            score.setText("Score : " + Integer.toString(scoren));
+        }
         else
             Toast.makeText(getApplicationContext(), "Wrong Answer",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
+        Button yes = (Button) findViewById(R.id.yesbutton);
+        Button no = (Button) findViewById(R.id.nobutton);
+        yes.setEnabled(false);
+        no.setEnabled(false);
     }
 
     public void nobut(View view){
         TextView number = (TextView) findViewById(R.id.number);
         if(isPrime(Integer.parseInt(number.getText().toString())))
             Toast.makeText(getApplicationContext(), "Wrong Answer",
-                    Toast.LENGTH_LONG).show();
-        else
+                    Toast.LENGTH_SHORT).show();
+        else {
             Toast.makeText(getApplicationContext(), "Correct Answer",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
+            scoren++;
+            TextView score = (TextView) findViewById(R.id.score);
+            score.setText("Score : " + Integer.toString(scoren));
+        }
+        Button yes = (Button) findViewById(R.id.yesbutton);
+        Button no = (Button) findViewById(R.id.nobutton);
+        yes.setEnabled(false);
+        no.setEnabled(false);
     }
 
     public void nextbut(View view){
         TextView number = (TextView) findViewById(R.id.number);
         number.setText(Integer.toString(rand.nextInt(1000)));
+        Button yes = (Button) findViewById(R.id.yesbutton);
+        Button no = (Button) findViewById(R.id.nobutton);
+        yes.setEnabled(true);
+        no.setEnabled(true);
     }
 
     @Override
