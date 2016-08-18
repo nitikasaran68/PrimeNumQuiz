@@ -21,6 +21,7 @@ public class MyActivity extends AppCompatActivity {
 
     Random rand = new Random();
     static int scoren = 0;
+    static boolean done = false ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +38,33 @@ public class MyActivity extends AppCompatActivity {
         ques.setTypeface(Typeface.createFromAsset(getAssets(),"GrandHotel-Regular.otf"));
         ques.setTextSize(80);
         number.setText(Integer.toString(rand.nextInt(1000)));
-        score.setText("Score : 0");
+        score.setText("Score : " + scoren);
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
-        //Log.i(TAG, "Inside onSaveInstance");
+        TextView number = (TextView) findViewById(R.id.number);
+        savedInstanceState.putInt("score",scoren);
+        savedInstanceState.putInt("num",Integer.parseInt(number.getText().toString()));
+        savedInstanceState.putBoolean("done",done);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle state){
+        super.onRestoreInstanceState(state);
+        done = state.getBoolean("done");
+        if(done) {
+            Button yes = (Button) findViewById(R.id.yesbutton);
+            Button no = (Button) findViewById(R.id.nobutton);
+            yes.setEnabled(false);
+            no.setEnabled(false);
+        }
+        TextView number = (TextView) findViewById(R.id.number);
+        number.setText(Integer.toString(state.getInt("num")));
+        scoren = state.getInt("score");
+        TextView score = (TextView) findViewById(R.id.score);
+        score.setText("Score : " + scoren);
     }
 
     boolean isPrime(int n){
@@ -59,6 +80,7 @@ public class MyActivity extends AppCompatActivity {
     }
 
     public void yesbut(View view){
+        done = true;
         TextView number = (TextView) findViewById(R.id.number);
         if(isPrime(Integer.parseInt(number.getText().toString()))) {
             Toast.makeText(getApplicationContext(), "Correct Answer",
@@ -77,6 +99,7 @@ public class MyActivity extends AppCompatActivity {
     }
 
     public void nobut(View view){
+        done = true;
         TextView number = (TextView) findViewById(R.id.number);
         if(isPrime(Integer.parseInt(number.getText().toString())))
             Toast.makeText(getApplicationContext(), "Wrong Answer",
@@ -95,6 +118,7 @@ public class MyActivity extends AppCompatActivity {
     }
 
     public void nextbut(View view){
+        done = false;
         TextView number = (TextView) findViewById(R.id.number);
         number.setText(Integer.toString(rand.nextInt(1000)));
         Button yes = (Button) findViewById(R.id.yesbutton);

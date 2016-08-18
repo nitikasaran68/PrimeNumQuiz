@@ -10,22 +10,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.nitikasaran.ass1.MyActivity"
-    tools:showIn="@layout/activity_my"
     android:background="@drawable/nb">
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Is this prime?"
-        android:textSize="60dp"
+        android:textSize="40dp"
         android:id="@+id/ques"
         android:textAlignment="center"
         android:textColor="#2522bf"
         android:textStyle="bold"
+        android:typeface="sans"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
-        android:typeface="sans" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -72,9 +71,9 @@
         android:layout_height="wrap_content"
         android:text="1000"
         android:id="@+id/number"
-        android:textSize="80dp"
+        android:textSize="60dp"
         android:textColor="#ce1616"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/ques"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -85,6 +84,7 @@
         android:id="@+id/score"
         android:textSize="35dp"
         android:layout_below="@+id/number"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#1d1a1a" />
 
 </RelativeLayout>
