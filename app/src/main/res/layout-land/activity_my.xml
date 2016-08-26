@@ -35,7 +35,6 @@
         android:textSize="20dp"
         android:onClick="yesbut"
         android:typeface="serif"
-        android:layout_marginTop="48dp"
         android:layout_below="@+id/score"
         android:layout_toLeftOf="@+id/number"
         android:layout_toStartOf="@+id/number" />
@@ -86,5 +85,29 @@
         android:layout_below="@+id/number"
         android:layout_centerHorizontal="true"
         android:textColor="#1d1a1a" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hint"
+        android:id="@+id/hintbut"
+        android:textSize="20dp"
+        android:typeface="serif"
+        android:onClick="hint"
+        android:layout_below="@+id/yesbutton"
+        android:layout_toLeftOf="@+id/cheatbut"
+        android:layout_toStartOf="@+id/cheatbut" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cheat"
+        android:id="@+id/cheatbut"
+        android:textSize="20dp"
+        android:typeface="serif"
+        android:layout_below="@+id/nobutton"
+        android:layout_alignRight="@+id/nextbutton"
+        android:layout_alignEnd="@+id/nextbutton"
+        android:onClick="cheat" />
 
 </RelativeLayout>

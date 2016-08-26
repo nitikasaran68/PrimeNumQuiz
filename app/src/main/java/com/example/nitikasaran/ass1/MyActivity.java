@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import java.util.Random;
 
@@ -22,6 +23,8 @@ public class MyActivity extends AppCompatActivity {
     Random rand = new Random();
     static int scoren = 0;
     static boolean done = false ;
+    static boolean hinttaken = false;
+    static boolean cheattaken = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,13 @@ public class MyActivity extends AppCompatActivity {
         number.setTypeface(Typeface.createFromAsset(getAssets(),"GrandHotel-Regular.otf"));
         ques.setTypeface(Typeface.createFromAsset(getAssets(),"GrandHotel-Regular.otf"));
         ques.setTextSize(80);
-        number.setText(Integer.toString(rand.nextInt(1000)));
+        Intent i = getIntent();
+        String num = i.getStringExtra("num");
+        //if(numnull)){
+            number.setText(Integer.toString(rand.nextInt(1000)));
+//        else{
+//            number.setText(num);
+//        }
         score.setText("Score : " + scoren);
     }
 
@@ -118,6 +127,12 @@ public class MyActivity extends AppCompatActivity {
     }
 
     public void nextbut(View view){
+//        Button hintb = (Button)findViewById(R.id.hintbut);
+//        hintb.setEnabled(true);
+//        Button cheatb = (Button)findViewById(R.id.cheatbut);
+//        cheatb.setEnabled(true);
+        hinttaken = false;
+        cheattaken = false;
         done = false;
         TextView number = (TextView) findViewById(R.id.number);
         number.setText(Integer.toString(rand.nextInt(1000)));
@@ -125,6 +140,41 @@ public class MyActivity extends AppCompatActivity {
         Button no = (Button) findViewById(R.id.nobutton);
         yes.setEnabled(true);
         no.setEnabled(true);
+    }
+
+    public void hint(View view){
+        hinttaken = true;
+       // Button hintb = (Button)findViewById(R.id.hintbut);
+       // hintb.setEnabled(false);
+        Intent intent = new Intent(this, Hint.class);
+        startActivity(intent);
+    }
+
+    public void cheat(View view){
+        cheattaken = true;
+       // Button hintb = (Button)findViewById(R.id.cheatbut);
+       // hintb.setEnabled(false);
+        Intent intent = new Intent(this, Cheat.class);
+        TextView ques = (TextView) findViewById(R.id.number);
+        int x = Integer.parseInt(ques.getText().toString());
+        intent.putExtra("message", Boolean.toString(isPrime(x)));
+        intent.putExtra("num", ques.getText().toString());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(hinttaken) {
+            Toast.makeText(getApplicationContext(), "You just took a hint!",
+                    Toast.LENGTH_SHORT).show();
+            hinttaken = false;
+        }
+        if(cheattaken){
+            Toast.makeText(getApplicationContext(), "You just took a cheat!",
+                    Toast.LENGTH_SHORT).show();
+            cheattaken = false;
+        }
     }
 
     @Override
